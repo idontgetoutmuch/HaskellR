@@ -246,20 +246,20 @@ initialize Config{..} = do
 #else
     let stackLimit = ResourceLimitUnknown
 #endif
-    setResourceLimit ResourceStackSize (ResourceLimits stackLimit stackLimit)
-      `onException` (hPutStrLn stderr $
-                       "Language.R.Interpreter: "
-                       ++ "Cannot increase stack size limit."
-                       ++ "Try increasing your stack size limit manually:"
-#ifdef darwin_HOST_OS
-                       ++ "$ launchctl limit stack 67104768"
-                       ++ "$ ulimit -s 65532"
-#elif defined(freebsd_HOST_OS)
-                       ++ "$ ulimit -s 67104768"
-#else
-                       ++ "$ ulimit -s unlimited"
-#endif
-                    )
+--     setResourceLimit ResourceStackSize (ResourceLimits stackLimit stackLimit)
+--       `onException` (hPutStrLn stderr $
+--                        "Language.R.Interpreter: "
+--                        ++ "Cannot increase stack size limit."
+--                        ++ "Try increasing your stack size limit manually:"
+-- #ifdef darwin_HOST_OS
+--                        ++ "$ launchctl limit stack 67104768"
+--                        ++ "$ ulimit -s 65532"
+-- #elif defined(freebsd_HOST_OS)
+--                        ++ "$ ulimit -s 67104768"
+-- #else
+--                        ++ "$ ulimit -s unlimited"
+-- #endif
+--                     )
 #endif
     initialized <- fmap (==1) $ peek isRInitializedPtr
     -- See note [Concurrent initialization]
